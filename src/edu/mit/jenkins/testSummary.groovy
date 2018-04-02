@@ -4,7 +4,7 @@ import hudson.tasks.test.AbstractTestResultAction
 import hudson.model.Actionable
 
 @NonCPS
-def getTestSummary = { ->
+def getTestSummary() {
     def testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
     def summary = ""
 
