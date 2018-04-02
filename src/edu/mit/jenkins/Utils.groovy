@@ -26,7 +26,7 @@ def getTestSummary() {
 @NonCPS
 def gitHubStatusForBuildResult(String inStatus) {
     switch (inStatus) {
-        case "SUCCESS"
+        case "SUCCESS":
             return "SUCCESS"
         case ["UNSTABLE", "FAILURE"]:
             return "FAILURE"
