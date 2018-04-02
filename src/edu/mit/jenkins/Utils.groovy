@@ -22,3 +22,16 @@ def getTestSummary() {
     }
     return summary
 }
+
+@NonCPS
+def gitHubStatusForBuildResult(String inStatus) {
+    switch (inStatus) {
+        case "SUCCESS"
+            return "SUCCESS"
+        case ["UNSTABLE", "FAILURE"]:
+            return "FAILURE"
+        // case ["ERROR", "ABORTED", "NOT_BUILT"]:
+        default
+            return "ERROR"
+    }
+}
