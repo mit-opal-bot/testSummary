@@ -31,7 +31,7 @@ def gitHubStatusForBuildResult(String inStatus) {
         case ["UNSTABLE", "FAILURE"]:
             return "FAILURE"
         // case ["ERROR", "ABORTED", "NOT_BUILT"]:
-        default
+        default:
             return "ERROR"
     }
 }
