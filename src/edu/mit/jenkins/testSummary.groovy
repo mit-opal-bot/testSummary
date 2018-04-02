@@ -1,3 +1,5 @@
+package edu.mit.jenkins
+
 import hudson.tasks.test.AbstractTestResultAction
 import hudson.model.Actionable
 
@@ -19,8 +21,4 @@ def getTestSummary = { ->
         summary = "No tests found"
     }
     return summary
-}
-
-def call(body) {
-    return getTestSummary()
 }
