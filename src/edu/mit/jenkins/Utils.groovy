@@ -41,7 +41,7 @@ def gitHubStatusForBuildResult(String inStatus) {
 @NonCPS
 def warningsInfo() {
     def warningActions = currentBuild.rawBuild.getActions(WarningsResultAction.class)
-    // result = warningActions[0].getResult()
+    result = warningActions[0].getResult()
     // println result
     // println result.getNumberOfNewWarnings()
     // println result.getNumberOfFixedWarnings()
