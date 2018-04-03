@@ -2,7 +2,7 @@ package edu.mit.jenkins
 
 import hudson.tasks.test.AbstractTestResultAction
 import hudson.plugins.warnings.WarningsResultAction
-import hudson.plugins.warnings.AggregateWarningsResultAction
+import hudson.plugins.warnings.AggregatedWarningsResultAction
 import hudson.model.Actionable
 
 @NonCPS
@@ -42,6 +42,6 @@ def gitHubStatusForBuildResult(String inStatus) {
 def warningsInfo() {
     def warningAction = currentBuild.rawBuild.getAction(WarningsResultAction.class)
     println warningAction
-    def aggregateAction = currentBuild.rawBuild.getAction(AggregateWarningsResultAction.class)
+    def aggregateAction = currentBuild.rawBuild.getAction(AggregatedWarningsResultAction.class)
     println aggregateAction
 }
