@@ -39,8 +39,8 @@ def gitHubStatusForBuildResult(String inStatus) {
 
 @NonCPS
 def warningsInfo() {
-    def warningAction = currentBuild.rawBuild.getAction(hudson.plugins.warnings.WarningsResultAction.class)
+    def warningAction = currentBuild.rawBuild.getAction(WarningsResultAction.class)
     println warningAction
-    def aggregateAction = currentBuild.rawBuild.getAction(hudson.plugins.warnings.AggregateWarningsResultAction.class)
+    def aggregateAction = currentBuild.rawBuild.getAction(AggregateWarningsResultAction.class)
     println aggregateAction
 }
