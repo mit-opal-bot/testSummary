@@ -42,7 +42,12 @@ def gitHubStatusForBuildResult(String inStatus) {
 def warningsInfo() {
     def warningActions = currentBuild.rawBuild.getActions(WarningsResultAction.class)
     println "${warningActions.size()} ${warningActions}"
-    println warningActions[0].getResult().createDeltaMessage()
+    result = warningActions[0].getResult()
+    println warningActions[0].getResult()
+    print = result.getNumberOfNewWarnings()
+    print = result.getNumberOfHighPriorityWarnings()
+    print = result.getNumberOfNormalPriorityWarnings()
+    print = result.getNumberOfLowPriorityWarnings()
     println warningActions[0].getBuildHealth()
     println warningActions[0].getHealthDescriptor()
     def aggregatedActions = currentBuild.rawBuild.getActions(AggregatedWarningsResultAction.class)
