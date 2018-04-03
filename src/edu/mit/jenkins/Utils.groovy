@@ -51,9 +51,10 @@ def warningsInfo() {
         high: action.getResult().getNumberOfHighPriorityWarnings(),
         normal: action.getResult().getNumberOfNormalPriorityWarnings(),
         low: action.getResult().getNumberOfLowPriorityWarnings(),
-        total: high + normal + low,
+        total: 0,
         description: ''
     ]
+    info.total = info.high + info.normal + info.low
 
     switch (info) {
         case { it.newWarnings == 0 && it.fixedWarnings == 0 }:
