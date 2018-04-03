@@ -75,5 +75,5 @@ def warningsInfo() {
     //         break;
     // }
 
-    // return info
+    return "info"
 }
