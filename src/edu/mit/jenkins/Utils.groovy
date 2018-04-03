@@ -1,6 +1,5 @@
 package edu.mit.jenkins
 
-import jenkins.model.Jenkins
 import hudson.tasks.test.AbstractTestResultAction
 import hudson.plugins.warnings.WarningsResultAction
 import hudson.model.Actionable
