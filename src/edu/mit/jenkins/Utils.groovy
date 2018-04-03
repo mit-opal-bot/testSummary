@@ -52,25 +52,37 @@ def warningsInfo() {
         normal: action.getResult().getNumberOfNormalPriorityWarnings(),
         low: action.getResult().getNumberOfLowPriorityWarnings(),
         total: 0,
-        description: ''
+        diffDescription: '',
+        totalDescription: '',
     ]
     info.total = info.high + info.normal + info.low
 
-    switch (info) {
-        case { it.newWarnings == 0 && it.fixedWarnings == 0 }:
-            info.description = "PyLint found no new or fixed issues."
-            break;
-        case info.fixedWarnings == 0:
-            info.description = "PyLint found ${info.newWarnings} new issues."
-            break;
-        case info.newWarnings == 0:
-            info.description = "PyLint found ${info.fixedWarnings} fixed issues."
+    switch (info.total) {
+        case 0:
+            info.totalDescription = "PyLint found no issues."
             break;
         default:
-            info.description = "PyLint found ${info.newWarnings} new and ${info.fixedWarnings} fixed issues."
+            info.totalDescription = "PyLint found ${info.total} issues."
             break;
     }
-    println info.description
+    
+
+    switch (info) {
+        case { it.newWarnings == 0 && it.fixedWarnings == 0 }:
+            info.diffDescription = "PyLint found no new or fixed issues."
+            break;
+        case info.fixedWarnings == 0:
+            info.diffDescription = "PyLint found ${info.newWarnings} new issues."
+            break;
+        case info.newWarnings == 0:
+            info.diffDescription = "PyLint found ${info.fixedWarnings} fixed issues."
+            break;
+        default:
+            info.diffDescription = "PyLint found ${info.newWarnings} new and ${info.fixedWarnings} fixed issues."
+            break;
+    }
+    println info.diffDescription
+    println info.totalDescription
 
     return info
 }
