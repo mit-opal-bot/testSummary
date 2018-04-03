@@ -41,39 +41,35 @@ def gitHubStatusForBuildResult(String inStatus) {
 @NonCPS
 def warningsInfo() {
     def action = currentBuild.rawBuild.getAction(WarningsResultAction.class)
-    println action.getResult()
-    // println result
-    println action.getResult().getNumberOfNewWarnings()
-    println action.getResult().getNumberOfFixedWarnings()
-    println action.getResult().getNumberOfHighPriorityWarnings()
-    println action.getResult().getNumberOfNormalPriorityWarnings()
-    println action.getResult().getNumberOfLowPriorityWarnings()
-    // println high + normal + low
+    // Keep repeating action.getResult() because, if you assign it to a
+    // variable, builds will fail with
+    // java.io.NotSerializableException: org.jenkinsci.plugins.workflow.job.WorkflowRun.
 
-    // info = [
-    //     newWarnings: result.getNumberOfNewWarnings(),
-    //     fixedWarnings: result.getNumberOfFixedWarnings(),
-    //     high: result.getNumberOfHighPriorityWarnings(),
-    //     normal: result.getNumberOfNormalPriorityWarnings(),
-    //     low: result.getNumberOfLowPriorityWarnings(),
-    //     total: high + normal + low,
-    //     description: ''
-    // ]
+    info = [
+        newWarnings: action.getResult().getNumberOfNewWarnings(),
+        fixedWarnings: action.getResult().getNumberOfFixedWarnings(),
+        high: action.getResult().getNumberOfHighPriorityWarnings(),
+        normal: action.getResult().getNumberOfNormalPriorityWarnings(),
+        low: action.getResult().getNumberOfLowPriorityWarnings(),
+        total: high + normal + low,
+        description: ''
+    ]
 
-    // switch (info) {
-    //     case { it.newWarnings == 0 && it.fixedWarnings == 0 }:
-    //         info.description = "PyLint found no new or fixed issues."
-    //         break;
-    //     case info.fixedWarnings == 0:
-    //         info.description = "PyLint found ${info.newWarnings} new issues."
-    //         break;
-    //     case info.newWarnings == 0:
-    //         info.description = "PyLint found ${info.fixedWarnings} fixed issues."
-    //         break;
-    //     default:
-    //         info.description = "PyLint found ${info.newWarnings} new and ${info.fixedWarnings} fixed issues."
-    //         break;
-    // }
+    switch (info) {
+        case { it.newWarnings == 0 && it.fixedWarnings == 0 }:
+            info.description = "PyLint found no new or fixed issues."
+            break;
+        case info.fixedWarnings == 0:
+            info.description = "PyLint found ${info.newWarnings} new issues."
+            break;
+        case info.newWarnings == 0:
+            info.description = "PyLint found ${info.fixedWarnings} fixed issues."
+            break;
+        default:
+            info.description = "PyLint found ${info.newWarnings} new and ${info.fixedWarnings} fixed issues."
+            break;
+    }
+    println info.description
 
-    return "info"
+    return info
 }
