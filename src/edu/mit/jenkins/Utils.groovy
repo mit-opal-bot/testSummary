@@ -43,12 +43,12 @@ def warningsInfo() {
     def warningActions = currentBuild.rawBuild.getActions(WarningsResultAction.class)
     result = warningActions[0].getResult()
     println result
-    newWarnings = result.getNumberOfNewWarnings()
-    fixedWarnings = result.getNumberOfFixedWarnings()
-    high = result.getNumberOfHighPriorityWarnings()
-    normal = result.getNumberOfNormalPriorityWarnings()
-    low = result.getNumberOfLowPriorityWarnings()
-    total = high + normal + low
+    println result.getNumberOfNewWarnings()
+    println result.getNumberOfFixedWarnings()
+    println result.getNumberOfHighPriorityWarnings()
+    println result.getNumberOfNormalPriorityWarnings()
+    println result.getNumberOfLowPriorityWarnings()
+    println high + normal + low
 
     info = [
         newWarnings: result.getNumberOfNewWarnings(),
@@ -65,13 +65,13 @@ def warningsInfo() {
             info.description = "PyLint found no new or fixed issues."
             break;
         case info.fixedWarnings == 0:
-            info.description = "PyLint found ${newWarnings} new issues."
+            info.description = "PyLint found ${info.newWarnings} new issues."
             break;
         case info.newWarnings == 0:
-            info.description = "PyLint found ${fixedWarnings} fixed issues."
+            info.description = "PyLint found ${info.fixedWarnings} fixed issues."
             break;
         default:
-            info.description = "PyLint found ${newWarnings} new and ${fixedWarnings} fixed issues."
+            info.description = "PyLint found ${info.newWarnings} new and ${info.fixedWarnings} fixed issues."
             break;
     }
 
