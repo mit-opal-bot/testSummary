@@ -81,8 +81,6 @@ def warningsInfo() {
             info.diffDescription = "PyLint found ${info.newWarnings} new and ${info.fixedWarnings} fixed issues."
             break;
     }
-    println info.diffDescription
-    println info.totalDescription
 
     return info
 }
