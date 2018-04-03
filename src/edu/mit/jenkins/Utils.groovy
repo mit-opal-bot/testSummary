@@ -2,6 +2,7 @@ package edu.mit.jenkins
 
 import hudson.tasks.test.AbstractTestResultAction
 import hudson.plugins.warnings.WarningsResultAction
+import hudson.plugins.warnings.AggregateWarningsResultAction
 import hudson.model.Actionable
 
 @NonCPS
