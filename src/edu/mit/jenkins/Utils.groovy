@@ -1,5 +1,6 @@
 package edu.mit.jenkins
 
+import jenkins.model.Jenkins
 import hudson.tasks.test.AbstractTestResultAction
 import hudson.model.Actionable
 
@@ -34,4 +35,10 @@ def gitHubStatusForBuildResult(String inStatus) {
         default:
             return "ERROR"
     }
+}
+
+@NonCPS
+def warningsInfo() {
+    build = Jenkins.instance.items[0].builds[0]
+    println build
 }
