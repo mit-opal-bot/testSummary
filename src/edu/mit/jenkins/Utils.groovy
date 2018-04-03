@@ -41,16 +41,39 @@ def gitHubStatusForBuildResult(String inStatus) {
 @NonCPS
 def warningsInfo() {
     def warningActions = currentBuild.rawBuild.getActions(WarningsResultAction.class)
-    println "${warningActions.size()} ${warningActions}"
     result = warningActions[0].getResult()
-    println warningActions[0].getResult()
-    println result.getNumberOfNewWarnings()
-    println result.getNumberOfHighPriorityWarnings()
-    println result.getNumberOfNormalPriorityWarnings()
-    println result.getNumberOfLowPriorityWarnings()
-    println warningActions[0].getBuildHealth()
-    println warningActions[0].getHealthDescriptor()
-    def aggregatedActions = currentBuild.rawBuild.getActions(AggregatedWarningsResultAction.class)
-    println "${aggregatedActions.size()} ${aggregatedActions}"
-    println aggregatedActions[0].getResult().createDeltaMessage()
+    println result
+    newWarnings = result.getNumberOfNewWarnings()
+    fixedWarnings = result.getNumberOfFixedWarnings()
+    high = result.getNumberOfHighPriorityWarnings()
+    normal = result.getNumberOfNormalPriorityWarnings()
+    low = result.getNumberOfLowPriorityWarnings()
+    total = high + normal + low
+
+    info = [
+        newWarnings: result.getNumberOfNewWarnings(),
+        fixedWarnings: result.getNumberOfFixedWarnings(),
+        high: result.getNumberOfHighPriorityWarnings(),
+        normal: result.getNumberOfNormalPriorityWarnings(),
+        low: result.getNumberOfLowPriorityWarnings(),
+        total: high + normal + low,
+        description: ''
+    ]
+
+    switch (info) {
+        case { it.newWarnings == 0 && it.fixedWarnings == 0 }:
+            info.description = "PyLint found no new or fixed issues."
+            break;
+        case info.fixedWarnings == 0:
+            info.description = "PyLint found ${newWarnings} new issues."
+            break;
+        case info.newWarnings == 0:
+            info.description = "PyLint found ${fixedWarnings} fixed issues."
+            break;
+        default:
+            info.description = "PyLint found ${newWarnings} new and ${fixedWarnings} fixed issues."
+            break;
+    }
+
+    return info
 }
