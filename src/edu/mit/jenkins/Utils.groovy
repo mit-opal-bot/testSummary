@@ -40,8 +40,8 @@ def gitHubStatusForBuildResult(String inStatus) {
 
 @NonCPS
 def warningsInfo() {
-    def warningAction = currentBuild.rawBuild.getAction(WarningsResultAction.class)
+    def warningAction = currentBuild.rawBuild.getActions(WarningsResultAction.class)
     println warningAction
-    def aggregateAction = currentBuild.rawBuild.getAction(AggregatedWarningsResultAction.class)
+    def aggregateAction = currentBuild.rawBuild.getActions(AggregatedWarningsResultAction.class)
     println aggregateAction
 }
